@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Super App - Map</title>
+
+    <!-- Bootstrap CSS -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Campus Life App</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dining.html">Dining</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="map.html">Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-light py-4">
+        <div class="container">
+            <h1 class="fw-bold">Campus Map</h1>
+            <p class="lead">Find buildings, parking, and points of interest across campus.</p>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <!-- Map Placeholder -->
+        <section class="mb-4">
+            <h2 class="h4 mb-3">Interactive Map (Placeholder)</h2>
+            <div 
+                id="mapPlaceholder" 
+                class="border rounded bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
+                style="height: 300px;"
+            >
+                <span class="text-muted">
+                    Map integration coming soon. This could be powered by a Maps API.
+                </span>
+            </div>
+        </section>
+
+        <!-- Location Search / Buttons -->
+        <section>
+            <h2 class="h4 mb-3">Quick Locations</h2>
+            <p>Click a button to highlight a key campus location (placeholder behavior).</p>
+
+            <div class="row g-2 mb-3">
+                <div class="col-sm-6 col-md-3">
+                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="library">
+                        Library
+                    </button>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="gym">
+                        Gym
+                    </button>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="dining">
+                        Dining Hall
+                    </button>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="admin">
+                        Admin Building
+                    </button>
+                </div>
+            </div>
+
+            <div id="locationInfo" class="alert alert-info" role="alert">
+                Select a location to see details here.
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
