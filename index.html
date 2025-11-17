@@ -15,6 +15,85 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
+<!-- Navbar (shared across all pages) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Campus Life App</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dining.html">Dining</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map.html">Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Intro -->
+    <header class="bg-light py-5">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Welcome to the Campus Life Super App</h1>
+            <p class="lead">
+                Your one-stop hub for campus events, dining options, and navigation.
+            </p>
+            <a href="events.html" class="btn btn-primary btn-lg">See Upcoming Events</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Events</h5>
+                        <p class="card-text">
+                            Stay updated with upcoming campus events, club meetings, and activities.
+                        </p>
+                        <a href="events.html" class="btn btn-outline-primary">View Events</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Dining</h5>
+                        <p class="card-text">
+                            Check dining hall hours, menus, and nearby food options on or near campus.
+                        </p>
+                        <a href="dining.html" class="btn btn-outline-primary">Explore Dining</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Campus Map</h5>
+                        <p class="card-text">
+                            Find buildings, parking, and points of interest with the interactive campus map.
+                        </p>
+                        <a href="map.html" class="btn btn-outline-primary">Open Map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simple JS hook -->
+        <div class="mt-5">
+            <h2>Quick Actions</h2>
+            <p>Click the button below to test that JavaScript is working on this page.</p>
+            <button id="homeTestButton" class="btn btn-success">Test JavaScript</button>
+        </div>
+    </main>
 
     <!-- Bootstrap JavaScript -->
     <script 
