@@ -7,59 +7,55 @@ console.log("Script loaded.");
 const eventsData = [
   {
     id: 1,
-    title: "Academic Event",
-    date: "date",
-    time: "time",
-    location: "location",
-    category: "academic",
+    title: "Welcome Week Kickoff",
+    date: "2025-08-20",
+    time: "6:00 PM",
+    location: "Bowl",
+    category: "Social",
     description:
-      "description"
+      "Join new and returning students for games, food trucks, and live music in the Bowl!"
   },
   {
     id: 2,
-    title: "social event",
-    date: "date",
-    time: "time",
-    location: "location",
-    category: "social",
-    description: "description"
+    title: "Business School Info Session",
+    date: "2025-09-05",
+    time: "3:00 PM",
+    location: "Else School of Management",
+    category: "academic",
+    description: "Learn about majors, internships, and career opportunities in business."
   },
   {
     id: 3,
-    title: "sporting event",
-    date: "date",
-    time: "time",
-    location: "location",
+    title: "Millsaps vs. Birmingham-Southern",
+    date: "2025-10-12",
+    time: "1:00 PM",
+    location: "harper Davis Field",
     category: "sports",
-    description: "description"
+    description: "Come cheer on the majors in this conference matchhup!"
   },
   {
     id: 4,
-    title: "club event",
-    date: "date",
-    time: "time",
-    location: "location",
+    title: "Campus Club Fair",
+    date: "2025-08-28",
+    time: "12:00 PM",
+    location: "Legget",
     category: "club",
-    description: "description"
+    description: "Meet student organizations and firnd your place on campus."
   }
 ];
 
-// Pretend to "fetch" events from an API
+// Simulated async API fetch
 function loadEventsFromApi() {
   return new Promise((resolve) => {
-    // Simulate network delay
-    setTimeout(() => {
-      resolve(eventsData);
-    }, 500);
+    setTimeout(() => resolve(eventsData), 500);
   });
 }
 
-// Keep events in memory once "loaded"
 let loadedEvents = [];
 
-// -----------------------------
-// DOM Ready
-// -----------------------------
+// ---------------------------------------------------------
+// DOM Ready → Initialize Pages
+// ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   setupHomePage();
   setupDiningPage();
@@ -67,39 +63,59 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventsPage();
 });
 
-// -----------------------------
-// Home page JS
-// -----------------------------
+// ---------------------------------------------------------
+// HOME PAGE — WEATHER API INTEGRATION
+// ---------------------------------------------------------
 function setupHomePage() {
-  const homeTestButton = document.getElementById("homeTestButton");
-  if (!homeTestButton) return;
+  const weatherButton = document.getElementById("weatherButton");
+  const weatherBox = document.getElementById("weatherBox");
 
-  homeTestButton.addEventListener("click", () => {
-    alert("JavaScript is working on the Home page!");
-  });
+  if (!weatherButton || !weatherBox) return;
+
+ weatherButton.addEventListener("click", () => {
+  fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=32.2988&longitude=-90.1848&current_weather=true&temperature_unit=fahrenheit"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const w = data.current_weather;
+
+      weatherBox.innerHTML = `
+        <strong>Current Weather:</strong><br>
+        Temperature: ${w.temperature}°F<br>
+        Windspeed: ${w.windspeed} mph<br>
+        Conditions: ${w.weathercode}
+      `;
+    })
+    .catch(() => {
+      weatherBox.textContent = "Unable to load weather data.";
+    });
+});
 }
 
-// -----------------------------
-// Dining page JS
-// -----------------------------
+
+
+
+// ---------------------------------------------------------
+// DINING PAGE — MENU PREVIEW
+// ---------------------------------------------------------
 function setupDiningPage() {
   const menuDisplay = document.getElementById("menuDisplay");
-  const diningButtons = document.querySelectorAll(".dining-menu-btn");
+  const buttons = document.querySelectorAll(".dining-menu-btn");
 
-  if (!menuDisplay || diningButtons.length === 0) return;
+  if (!menuDisplay || buttons.length === 0) return;
 
-  diningButtons.forEach((btn) => {
+  buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const hall = btn.getAttribute("data-hall");
-      if (hall === "main") {
-        menuDisplay.textContent =
-          "Sample Main Dining Hall Menu: Grilled chicken, pasta bar, salad bar, fruit, and dessert.";
-      } else if (hall === "cafe") {
-        menuDisplay.textContent =
-          "Sample Campus Café Menu: Coffee, bagels, breakfast sandwiches, wraps, and smoothies.";
-      } else {
-        menuDisplay.textContent = "Menu unavailable for this location.";
-      }
+      const hall = btn.dataset.hall;
+
+      const menus = {
+        main: "Today's Caf Menu: Grilled chicken, pasta bar, salad bar, fruit, and dessert.",
+        cafe: "Eco Grounds Menu: Lattes, cold brew, pastries, wraps, smoothies."
+      };
+
+      menuDisplay.textContent = menus[hall] || "Menu unavailable.";
+      menuDisplay.classList.add("fade-in");
     });
   });
 }
@@ -111,73 +127,86 @@ function setupMapPage() {
   const locationInfo = document.getElementById("locationInfo");
   const mapLocationButtons = document.querySelectorAll(".map-location-btn");
 
+  // If we're not on the Map page, bail out.
   if (!locationInfo || mapLocationButtons.length === 0) return;
 
+  // Text descriptions for the alert box
+  const locationDescriptions = {
+    library:
+      "Millsaps Library: Open 7:30 AM – 10 PM (Mon–Thu), 7:30 AM – 5 PM (Fri). Study rooms, printing, and research help.",
+    gym:
+      "Aquatic & Fitness Center: Open 6 AM – 9 PM. Includes weight room, cardio machines, basketball courts, and pool.",
+    dining:
+      "The Caf (Leggett Dining Hall): Main campus dining spot serving breakfast, lunch, and dinner.",
+    admin:
+      "Academic Complex / Admin: Admissions, Registrar, Academic Advising, and administrative offices."
+  };
+
+  // Button click behavior: just update the info box
   mapLocationButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const loc = btn.getAttribute("data-location");
-      if (loc === "library") {
-        locationInfo.textContent =
-          "Placeholder for hours and info.";
-      } else if (loc === "gym") {
-        locationInfo.textContent =
-          "Placeholder for hours and info.";
-      } else if (loc === "dining") {
-        locationInfo.textContent =
-          "Placeholder for hours and info.";
-      } else if (loc === "admin") {
-        locationInfo.textContent =
-          "Placeholder for hours and info.";
-      } else {
-        locationInfo.textContent = "Location information not available.";
-      }
+      locationInfo.textContent =
+        locationDescriptions[loc] || "Location information not available.";
+      locationInfo.classList.add("fade-in");
     });
   });
+
+  // -----------------------------
+  // Interactive map (no markers)
+  // -----------------------------
+  const campusMapContainer = document.getElementById("campusMap");
+
+  if (campusMapContainer && typeof L !== "undefined") {
+    // Center on Millsaps College area
+    const map = L.map("campusMap").setView([32.323800, -90.179016], 17);
+
+    // Base map tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+  }
 }
 
-// -----------------------------
-// Events page JS
-// -----------------------------
+// ---------------------------------------------------------
+// EVENTS PAGE — DYNAMIC RENDERING + FILTERING
+// ---------------------------------------------------------
 function setupEventsPage() {
   const eventsList = document.getElementById("eventsList");
-  const categoryFilter = document.getElementById("eventCategoryFilter");
-  const applyFilterBtn = document.getElementById("applyEventFilter");
+  const filter = document.getElementById("eventCategoryFilter");
+  const filterBtn = document.getElementById("applyEventFilter");
 
-  // If we're not on the Events page, bail out.
-  if (!eventsList || !categoryFilter || !applyFilterBtn) return;
+  if (!eventsList || !filter || !filterBtn) return;
 
-  // 1. "Fetch" events
+  // Load events once
   loadEventsFromApi().then((events) => {
     loadedEvents = events;
     renderEvents("all");
   });
 
-  // 2. Wire up filter button
-  applyFilterBtn.addEventListener("click", () => {
-    const selectedCategory = categoryFilter.value;
-    renderEvents(selectedCategory);
+  filterBtn.addEventListener("click", () => {
+    renderEvents(filter.value);
   });
 
-  // 3. Render function
   function renderEvents(category) {
-    eventsList.innerHTML = ""; // clear current content
+    eventsList.innerHTML = "";
 
-    const filteredEvents =
+    const filtered =
       category === "all"
         ? loadedEvents
-        : loadedEvents.filter((event) => event.category === category);
+        : loadedEvents.filter((e) => e.category === category);
 
-    if (filteredEvents.length === 0) {
-      eventsList.innerHTML =
-        '<p class="text-muted">No events match this category.</p>';
+    if (filtered.length === 0) {
+      eventsList.innerHTML = `<p class="text-muted">No events match this category.</p>`;
       return;
     }
 
-    filteredEvents.forEach((event) => {
-      const col = document.createElement("div");
-      col.className = "col-md-6";
+    filtered.forEach((event) => {
+      const div = document.createElement("div");
+      div.className = "col-md-6 fade-in";
 
-      col.innerHTML = `
+      div.innerHTML = `
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">${event.title}</h5>
@@ -187,9 +216,7 @@ function setupEventsPage() {
               <strong>Location:</strong> ${event.location}<br>
               <strong>Category:</strong> ${capitalize(event.category)}
             </p>
-            <p class="card-text">
-              ${event.description}
-            </p>
+            <p>${event.description}</p>
             <button class="btn btn-outline-primary event-details-btn" data-id="${event.id}">
               View Details
             </button>
@@ -197,37 +224,32 @@ function setupEventsPage() {
         </div>
       `;
 
-      eventsList.appendChild(col);
+      eventsList.appendChild(div);
     });
 
-    // Wire up detail buttons (simple alert for MVP)
-    const detailButtons = eventsList.querySelectorAll(".event-details-btn");
+    // Details
+    const detailButtons = document.querySelectorAll(".event-details-btn");
     detailButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const id = parseInt(btn.getAttribute("data-id"));
+        const id = parseInt(btn.dataset.id);
         const ev = loadedEvents.find((e) => e.id === id);
-        if (ev) {
-          alert(
-            `${ev.title}\n\nDate: ${formatDate(ev.date)}\nTime: ${ev.time}\nLocation: ${ev.location}\n\n${ev.description}`
-          );
-        }
+
+        alert(
+          `${ev.title}\n\nDate: ${formatDate(ev.date)}\nTime: ${ev.time}\nLocation: ${ev.location}\n\n${ev.description}`
+        );
       });
     });
   }
 }
 
-// -----------------------------
-// Helper functions
-// -----------------------------
-function formatDate(dateStr) {
-  // dateStr like "2025-10-20"
-  const date = new Date(dateStr);
-  if (isNaN(date)) return dateStr;
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  return date.toLocaleDateString(undefined, options);
+// ---------------------------------------------------------
+// Helper Functions
+// ---------------------------------------------------------
+function formatDate(str) {
+  const d = new Date(str);
+  return isNaN(d) ? str : d.toLocaleDateString("en-US");
 }
 
 function capitalize(str) {
-  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 }

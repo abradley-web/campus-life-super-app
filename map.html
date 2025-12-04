@@ -11,6 +11,12 @@
         rel="stylesheet"
     >
 
+    <!-- Leaflet CSS for Interactive Map -->
+    <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
     <!-- Your CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -39,48 +45,62 @@
     <header class="bg-light py-4">
         <div class="container">
             <h1 class="fw-bold">Campus Map</h1>
-            <p class="lead">Find buildings, parking, and points of interest across campus.</p>
+            <p class="lead">Explore campus buildings, sports facilities, and student areas.</p>
         </div>
     </header>
 
     <main class="container my-4">
-        <!-- Map Placeholder -->
+
+        <!-- Interactive Map -->
         <section class="mb-4">
-            <h2 class="h4 mb-3">Interactive Map (Placeholder)</h2>
+            <h2 class="h4 mb-3">Interactive Campus Map</h2>
+
             <div 
-                id="mapPlaceholder" 
-                class="border rounded bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
-                style="height: 300px;"
-            >
-                <span class="text-muted">
-                    Map integration coming soon. This could be powered by a Maps API.
-                </span>
-            </div>
+                id="campusMap" 
+                style="height: 400px;" 
+                class="rounded shadow-sm"
+            ></div>
         </section>
 
-        <!-- Location Search / Buttons -->
+        <!-- Quick Location Buttons -->
         <section>
             <h2 class="h4 mb-3">Quick Locations</h2>
-            <p>Click a button to highlight a key campus location (placeholder behavior).</p>
+            <p>Select a location to view details.</p>
 
             <div class="row g-2 mb-3">
                 <div class="col-sm-6 col-md-3">
-                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="library">
+                    <button 
+                        class="btn btn-outline-primary w-100 map-location-btn" 
+                        data-location="library"
+                        aria-label="View Library information"
+                    >
                         Library
                     </button>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="gym">
+                    <button 
+                        class="btn btn-outline-primary w-100 map-location-btn" 
+                        data-location="gym"
+                        aria-label="View Gym information"
+                    >
                         Gym
                     </button>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="dining">
+                    <button 
+                        class="btn btn-outline-primary w-100 map-location-btn" 
+                        data-location="dining"
+                        aria-label="View Dining Hall information"
+                    >
                         Dining Hall
                     </button>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <button class="btn btn-outline-primary w-100 map-location-btn" data-location="admin">
+                    <button 
+                        class="btn btn-outline-primary w-100 map-location-btn" 
+                        data-location="admin"
+                        aria-label="View Admin Building information"
+                    >
                         Admin Building
                     </button>
                 </div>
@@ -94,6 +114,11 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Leaflet JS -->
+    <script 
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
 
     <!-- Your JS -->
     <script src="js/script.js"></script>

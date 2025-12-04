@@ -45,12 +45,12 @@
 
     <!-- Events List -->
     <main class="container my-4">
-        <!-- Filter section (placeholder for future JS) -->
+        <!-- Filter section -->
 <section class="mb-4">
     <h2 class="h4">Filter Events</h2>
     <div class="row g-2">
         <div class="col-sm-6 col-md-4">
-            <select id="eventCategoryFilter" class="form-select">
+            <select id="eventCategoryFilter" class="form-select" aria-label="Select event category"> 
                 <option value="all">All Categories</option>
                 <option value="academic">Academic</option>
                 <option value="social">Social</option>
@@ -70,44 +70,6 @@
     <!-- JS will insert cards here -->
 </section>
 
-        <!-- Example events (placeholder data) -->
-        <section id="eventsList" class="row g-4">
-            <div class="col-md-6">
-                <div class="card h-100" data-category="academic">
-                    <div class="card-body">
-                        <h5 class="card-title">"Academic Event""</h5>
-                        <p class="card-text">
-                            <strong>Date:</strong> "Date"<br>
-                            <strong>Location:</strong> "Location"
-                        </p>
-                        <p class="card-text">
-                            "Description"
-                        </p>
-                        <button class="btn btn-outline-primary event-details-btn">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card h-100" data-category="social">
-                    <div class="card-body">
-                        <h5 class="card-title">"Social Event"</h5>
-                        <p class="card-text">
-                            <strong>Date:</strong> "Date"<br>
-                            <strong>Location:</strong> "Location"
-                        </p>
-                        <p class="card-text">
-                            "Description"
-                        </p>
-                        <button class="btn btn-outline-primary event-details-btn">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Bootstrap JS -->
